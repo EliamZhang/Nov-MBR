@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模型分比较结果｜Illion vs BSCAT｜纯数据解析</title>
+<style>
+:root {
+ --bg:#f4f6fa;--card:#fff;--ink:#1d2939;--muted:#667085;--line:#e4e7ec;
+ --blue:#245fae;--orange:#d95b2b;--soft:#f8fafc;--green:#16845b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif}
+main{max-width:1380px;margin:auto;padding:30px 24px 54px}
+header{margin-bottom:22px}
+h1{font-size:28px;line-height:1.25;margin:0 0 8px}
+h2{font-size:19px;margin:0 0 6px}
+h3{font-size:15px;margin:18px 0 10px}
+.subtitle,.desc,.muted{color:var(--muted)}
+.subtitle{font-size:13px}
+.section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:21px 22px;margin:16px 0}
+.desc{font-size:13px;margin:0 0 15px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .label{font-size:12px;color:var(--muted)}
+.kpi .value{font-size:23px;font-weight:750;font-variant-numeric:tabular-nums;margin:4px 0}
+.kpi .hint{font-size:12px;color:var(--muted)}
+.table-wrap{width:100%;overflow:auto;border:1px solid var(--line);border-radius:9px;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
+th,td{padding:9px 11px;border-bottom:1px solid #edf0f3;text-align:right;white-space:nowrap}
+thead th{background:#f7f9fc;color:#475467;font-weight:700;position:sticky;top:0}
+th:first-child,td:first-child{text-align:left}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fafcff}
+.metric-table th:first-child{min-width:210px}
+.total{font-weight:750;background:#f4f6f9}
+.diff{font-weight:700;color:var(--blue)}
+.source-title{display:flex;align-items:center;gap:8px;font-weight:750;margin:15px 0 8px}
+.source-title:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.source-title.orange:before{background:var(--orange)}
+.note{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:11px 13px;color:#526071;font-size:12px;margin-top:13px}
+ul{padding-left:19px;margin:8px 0}
+li{margin:6px 0}
+.tag{display:inline-block;padding:4px 9px;border-radius:20px;background:#edf4ff;color:#245fae;font-size:12px;font-weight:700;margin-left:8px}
+details{border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+summary{padding:12px 14px;cursor:pointer;font-weight:700;background:#fafbfc}
+.details-inner{padding:12px 14px}
+footer{color:#98a2b3;text-align:center;font-size:12px;margin-top:25px}
+@media(max-width:800px){main{padding:18px 12px 40px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.section{padding:16px 13px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+ <h1>模型分比较结果：Illion vs BSCAT <span class="tag">纯数据版</span></h1>
+ <div class="subtitle">已解析原始 Excel 的全部 3 个工作表、全部非空数据及图表对应数值；不嵌入图片、SVG 或截图。</div>
+</header>
+
+<div class="kpis">
+ <div class="kpi"><div class="label">样本量</div><div class="value">9,503</div><div class="hint">Illion / BSCAT 一致</div></div>
+ <div class="kpi"><div class="label">坏样本数</div><div class="value">950</div><div class="hint">整体坏账率 0.1000%</div></div>
+ <div class="kpi"><div class="label">AUC</div><div class="value">0.778710</div><div class="hint">Illion 高于 BSCAT 0.031392</div></div>
+ <div class="kpi"><div class="label">Pearson 相关系数</div><div class="value">0.9143</div><div class="hint">两套模型分较强正相关</div></div>
+</div>
+
+<section class="section">
+ <h2>一、核心结果</h2>
+ <p class="desc">以下结论均由工作簿内的原始数据计算或读取。</p>
+ <ul>
+  <li>两套模型样本口径一致：N = 9,503，Bad = 950，Good = 8,553，整体坏账率约 10.00%。</li>
+  <li>Illion 的 AUC 为 0.778710，高于 BSCAT 的 0.747319，差值为 0.031392；KS 高 0.062914，Gini 高 0.062783，PR-AUC 高 0.033494。</li>
+  <li>Top 10% 坏样本捕获率：Illion 31.3684%，BSCAT 28.8421%，Illion 高 2.5263 个百分点。</li>
+  <li>Brier Score：Illion 0.081589，BSCAT 0.083387。该指标通常越低越好。</li>
+  <li>分位坏账率的最大绝对差约为 1.8091 个百分点，出现在 D6；两套模型的分位风险趋势整体相近。</li>
+ </ul>
+</section>
+
+<section class="section">
+ <h2>二、分位坏账率对比数据</h2>
+ <p class="desc">原 Excel 内嵌图表的文字信息与底层数据已转为文本和表格。原图标题为 “Decile Bad Rate Comparison”；副标题为 “Actual FPD15 bad rate by fixed decile; Bad = 950 of 9,503 (10.00%)”。横轴为 Fixed decile，纵轴为 Actual bad rate；系列为 Source A (illion) 与 Source B (bscat)。</p>
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>固定分位</th><th>Illion 坏账率</th><th>BSCAT 坏账率</th><th>差值（Illion - BSCAT）</th></tr></thead>
+   <tbody><tr><th>D1</th><td>0.960615%</td><td>1.014760%</td><td>-0.054145 pp</td></tr><tr><th>D2</th><td>1.970954%</td><td>2.992776%</td><td>-1.021822 pp</td></tr><tr><th>D3</th><td>2.556818%</td><td>4.304029%</td><td>-1.747211 pp</td></tr><tr><th>D4</th><td>4.935834%</td><td>4.523580%</td><td>+0.412254 pp</td></tr><tr><th>D5</th><td>6.120219%</td><td>7.649044%</td><td>-1.528825 pp</td></tr><tr><th>D6</th><td>6.524184%</td><td>8.333333%</td><td>-1.809149 pp</td></tr><tr><th>D7</th><td>12.240664%</td><td>12.487512%</td><td>-0.246849 pp</td></tr><tr><th>D8</th><td>13.054830%</td><td>14.694408%</td><td>-1.639578 pp</td></tr><tr><th>D9</th><td>23.092999%</td><td>21.500560%</td><td>+1.592439 pp</td></tr><tr><th>D10</th><td>31.023454%</td><td>29.811321%</td><td>+1.212133 pp</td></tr></tbody>
+  </table>
+ </div>
+ <div class="note">说明：此处只保留图表的文字信息和完整数值，不插入原始图片，也不使用 SVG 或其他图片格式。</div>
+</section>
+
+<section class="section">
+ <h2>三、指标效果完整明细</h2>
+ <p class="desc">来源工作表：指标效果。Difference = Source A（Illion）− Source B（BSCAT）。百分比指标的差值使用百分点（pp）。</p>
+ <div class="table-wrap">
+  <table class="metric-table">
+   <thead><tr><th>Metric</th><th>Source A（Illion）</th><th>Source B（BSCAT）</th><th>Difference（A-B）</th></tr></thead>
+   <tbody><tr><th scope='row'>N</th><td>9,503</td><td>9,503</td><td class='diff'>0</td></tr><tr><th scope='row'>Bad</th><td>950</td><td>950</td><td class='diff'>0</td></tr><tr><th scope='row'>Good</th><td>8,553</td><td>8,553</td><td class='diff'>0</td></tr><tr><th scope='row'>Bad Rate %</th><td>9.9968431%</td><td>9.9968431%</td><td class='diff'>0 pp</td></tr><tr><th scope='row'>AUC</th><td>0.77871033</td><td>0.7473187</td><td class='diff'>0.03139163</td></tr><tr><th scope='row'>KS</th><td>0.43987028</td><td>0.37695619</td><td class='diff'>0.06291409</td></tr><tr><th scope='row'>Gini</th><td>0.55742066</td><td>0.4946374</td><td class='diff'>0.06278326</td></tr><tr><th scope='row'>PR-AUC (AP)</th><td>0.27432165</td><td>0.24082734</td><td class='diff'>0.0334943</td></tr><tr><th scope='row'>Mean Score Good</th><td>0.09627881</td><td>0.0943016</td><td class='diff'>0.00197721</td></tr><tr><th scope='row'>Mean Score Bad</th><td>0.16823476</td><td>0.15406696</td><td class='diff'>0.01416779</td></tr><tr><th scope='row'>Score Gap Bad-Good</th><td>0.07195594</td><td>0.05976536</td><td class='diff'>0.01219058</td></tr><tr><th scope='row'>Capture @ Top 10% %</th><td>31.36842105%</td><td>28.84210526%</td><td class='diff'>2.52631579 pp</td></tr><tr><th scope='row'>Capture @ Top 20% %</th><td>54%</td><td>48.94736842%</td><td class='diff'>5.05263158 pp</td></tr><tr><th scope='row'>Capture @ Top 30% %</th><td>67.78947368%</td><td>62%</td><td class='diff'>5.78947368 pp</td></tr><tr><th scope='row'>Lift @ Top 10%</th><td>3.13684211x</td><td>2.88421053x</td><td class='diff'>0.25263158x</td></tr><tr><th scope='row'>Lift @ Top 20%</th><td>2.7x</td><td>2.44736842x</td><td class='diff'>0.25263158x</td></tr><tr><th scope='row'>Lift @ Top 30%</th><td>2.25964912x</td><td>2.06666667x</td><td class='diff'>0.19298246x</td></tr><tr><th scope='row'>Brier Score (score as PD)</th><td>0.08158936</td><td>0.08338741</td><td class='diff'>-0.00179806</td></tr></tbody>
+  </table>
+ </div>
+</section>
+
+<section class="section">
+ <h2>四、模型分矩阵完整数据</h2>
+ <p class="desc">来源工作表：模型分矩阵。Pearson 相关系数：r = 0.9143。行维度为 A_Decile，列维度为对应的 B_Decile 分位。</p>
+ <div class="kpis">
+  <div class="kpi"><div class="label">矩阵样本总数</div><div class="value">9,503</div><div class="hint">与指标表 N 一致</div></div>
+  <div class="kpi"><div class="label">同分位样本数</div><div class="value">4,826</div><div class="hint">占比 50.7840%</div></div>
+  <div class="kpi"><div class="label">相差不超过 1 档</div><div class="value">7,818</div><div class="hint">占比 82.2688%</div></div>
+  <div class="kpi"><div class="label">Pearson r</div><div class="value">0.9143</div><div class="hint">原表给定值</div></div>
+ </div>
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>A_Decile \ B_Decile</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th><th>60</th><th>70</th><th>80</th><th>90</th><th>100</th><th>行合计</th></tr></thead>
+   <tbody>
+    <tr><th scope='row'>10</th><td>803</td><td>181</td><td>40</td><td>11</td><td>3</td><td>1</td><td>2</td><td>0</td><td>0</td><td>0</td><td class='total'>1,041</td></tr><tr><th scope='row'>20</th><td>139</td><td>499</td><td>227</td><td>76</td><td>17</td><td>4</td><td>0</td><td>2</td><td>0</td><td>0</td><td class='total'>964</td></tr><tr><th scope='row'>30</th><td>81</td><td>147</td><td>519</td><td>207</td><td>71</td><td>23</td><td>7</td><td>1</td><td>0</td><td>0</td><td class='total'>1,056</td></tr><tr><th scope='row'>40</th><td>48</td><td>79</td><td>149</td><td>421</td><td>188</td><td>88</td><td>35</td><td>5</td><td>0</td><td>0</td><td class='total'>1,013</td></tr><tr><th scope='row'>50</th><td>12</td><td>40</td><td>77</td><td>149</td><td>354</td><td>206</td><td>61</td><td>11</td><td>5</td><td>0</td><td class='total'>915</td></tr><tr><th scope='row'>60</th><td>1</td><td>14</td><td>40</td><td>89</td><td>108</td><td>373</td><td>209</td><td>44</td><td>10</td><td>1</td><td class='total'>889</td></tr><tr><th scope='row'>70</th><td>0</td><td>4</td><td>24</td><td>53</td><td>89</td><td>150</td><td>404</td><td>186</td><td>52</td><td>2</td><td class='total'>964</td></tr><tr><th scope='row'>80</th><td>0</td><td>3</td><td>9</td><td>21</td><td>37</td><td>76</td><td>134</td><td>320</td><td>153</td><td>13</td><td class='total'>766</td></tr><tr><th scope='row'>90</th><td>0</td><td>2</td><td>7</td><td>9</td><td>20</td><td>44</td><td>121</td><td>140</td><td>484</td><td>130</td><td class='total'>957</td></tr><tr><th scope='row'>100</th><td>0</td><td>0</td><td>0</td><td>3</td><td>2</td><td>7</td><td>28</td><td>60</td><td>189</td><td>649</td><td class='total'>938</td></tr>
+    <tr><th>列合计</th><td class='total'>1,084</td><td class='total'>969</td><td class='total'>1,092</td><td class='total'>1,039</td><td class='total'>889</td><td class='total'>972</td><td class='total'>1,001</td><td class='total'>769</td><td class='total'>893</td><td class='total'>795</td><td class="total">9,503</td></tr>
+   </tbody>
+  </table>
+ </div>
+ <div class="note">同分位样本数为矩阵对角线之和；相差不超过 1 档为矩阵中 |行分位序号 − 列分位序号| ≤ 1 的单元格之和。两项均为基于原始矩阵计算的补充统计。</div>
+</section>
+
+<section class="section">
+ <h2>五、模型分分箱结果完整明细</h2>
+ <p class="desc">来源工作表：模型分分箱结果。保留两个分类来源各 10 个分位的全部 9 个字段。</p>
+ <div class="source-title">分类来源：Illion</div>
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>Decile</th><th>count</th><th>pct</th><th>bad</th><th>good</th><th>bad_rate</th><th>bad_contrib</th><th>good_contrib</th><th>lift</th></tr></thead>
+   <tbody><tr><td>10</td><td>1,041</td><td>10.954435%</td><td>10</td><td>1,031</td><td>0.960615%</td><td>1.052632%</td><td>12.05425%</td><td>0.09609181x</td></tr><tr><td>20</td><td>964</td><td>10.144165%</td><td>19</td><td>945</td><td>1.970954%</td><td>2%</td><td>11.048755%</td><td>0.19715768x</td></tr><tr><td>30</td><td>1,056</td><td>11.11228%</td><td>27</td><td>1,029</td><td>2.556818%</td><td>2.842105%</td><td>12.030866%</td><td>0.25576256x</td></tr><tr><td>40</td><td>1,013</td><td>10.659792%</td><td>50</td><td>963</td><td>4.935834%</td><td>5.263158%</td><td>11.259207%</td><td>0.49373928x</td></tr><tr><td>50</td><td>915</td><td>9.628538%</td><td>56</td><td>859</td><td>6.120219%</td><td>5.894737%</td><td>10.04326%</td><td>0.61221513x</td></tr><tr><td>60</td><td>889</td><td>9.354941%</td><td>58</td><td>831</td><td>6.524184%</td><td>6.105263%</td><td>9.715889%</td><td>0.65262447x</td></tr><tr><td>70</td><td>964</td><td>10.144165%</td><td>118</td><td>846</td><td>12.240664%</td><td>12.421053%</td><td>9.891266%</td><td>1.22445294x</td></tr><tr><td>80</td><td>766</td><td>8.060612%</td><td>100</td><td>666</td><td>13.05483%</td><td>10.526316%</td><td>7.786741%</td><td>1.30589529x</td></tr><tr><td>90</td><td>957</td><td>10.070504%</td><td>221</td><td>736</td><td>23.092999%</td><td>23.263158%</td><td>8.605168%</td><td>2.31002915x</td></tr><tr><td>100</td><td>938</td><td>9.870567%</td><td>291</td><td>647</td><td>31.023454%</td><td>30.631579%</td><td>7.564597%</td><td>3.1033251x</td></tr></tbody>
+   <tfoot><tr><th>合计</th><td>9,503</td><td>100%</td><td>950</td><td>8,553</td><td>0.099968%</td><td>100%</td><td>100%</td><td>1.000000x</td></tr></tfoot>
+  </table>
+ </div>
+ <div class="source-title orange">分类来源：BSCAT</div>
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>Decile</th><th>count</th><th>pct</th><th>bad</th><th>good</th><th>bad_rate</th><th>bad_contrib</th><th>good_contrib</th><th>lift</th></tr></thead>
+   <tbody><tr><td>10</td><td>1,084</td><td>11.406924%</td><td>11</td><td>1,073</td><td>1.01476%</td><td>1.157895%</td><td>12.545306%</td><td>0.10150806x</td></tr><tr><td>20</td><td>969</td><td>10.19678%</td><td>29</td><td>940</td><td>2.992776%</td><td>3.052632%</td><td>10.990296%</td><td>0.29937211x</td></tr><tr><td>30</td><td>1,092</td><td>11.491108%</td><td>47</td><td>1,045</td><td>4.304029%</td><td>4.947368%</td><td>12.217935%</td><td>0.43053885x</td></tr><tr><td>40</td><td>1,039</td><td>10.933389%</td><td>47</td><td>992</td><td>4.52358%</td><td>4.947368%</td><td>11.59827%</td><td>0.45250089x</td></tr><tr><td>50</td><td>889</td><td>9.354941%</td><td>68</td><td>821</td><td>7.649044%</td><td>7.157895%</td><td>9.598971%</td><td>0.76514594x</td></tr><tr><td>60</td><td>972</td><td>10.228349%</td><td>81</td><td>891</td><td>8.333333%</td><td>8.526316%</td><td>10.417397%</td><td>0.83359649x</td></tr><tr><td>70</td><td>1,001</td><td>10.533516%</td><td>125</td><td>876</td><td>12.487512%</td><td>13.157895%</td><td>10.24202%</td><td>1.24914559x</td></tr><tr><td>80</td><td>769</td><td>8.092181%</td><td>113</td><td>656</td><td>14.694408%</td><td>11.894737%</td><td>7.669823%</td><td>1.46990487x</td></tr><tr><td>90</td><td>893</td><td>9.397033%</td><td>192</td><td>701</td><td>21.50056%</td><td>20.210526%</td><td>8.195955%</td><td>2.15073496x</td></tr><tr><td>100</td><td>795</td><td>8.365779%</td><td>237</td><td>558</td><td>29.811321%</td><td>24.947368%</td><td>6.524027%</td><td>2.98207349x</td></tr></tbody>
+   <tfoot><tr><th>合计</th><td>9,503</td><td>100%</td><td>950</td><td>8,553</td><td>0.099968%</td><td>100%</td><td>100%</td><td>1.000000x</td></tr></tfoot>
+  </table>
+ </div>
+ <div class="note">
+  字段说明：count = 分位样本数；pct = 分位样本占比；bad / good = 坏样本 / 好样本数；
+  bad_rate = 分位坏账率；bad_contrib / good_contrib = 该分位占全部坏样本 / 好样本的比例；
+  lift = 分位坏账率相对整体坏账率的倍数。
+ </div>
+</section>
+
+<section class="section">
+ <h2>六、工作簿解析清单</h2>
+ <p class="desc">工作簿包含以下工作表，均已纳入本 HTML。</p>
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>工作表</th><th>最大行数</th><th>最大列数</th><th>非空单元格</th><th>状态</th></tr></thead>
+   <tbody><tr><td>模型分分箱结果</td><td>26</td><td>9</td><td>198</td><td>可见</td></tr><tr><td>模型分矩阵</td><td>14</td><td>11</td><td>123</td><td>可见</td></tr><tr><td>指标效果</td><td>19</td><td>4</td><td>76</td><td>可见</td></tr></tbody>
+  </table>
+ </div>
+ <ul><li><strong>模型分分箱结果</strong>：非空单元格 198 个；隐藏行 0 行；隐藏列 0 列；公式单元格 0 个；内嵌图片 1 张。</li><li><strong>模型分矩阵</strong>：非空单元格 123 个；隐藏行 0 行；隐藏列 0 列；公式单元格 0 个；内嵌图片 0 张。</li><li><strong>指标效果</strong>：非空单元格 76 个；隐藏行 0 行；隐藏列 0 列；公式单元格 0 个；内嵌图片 0 张。</li></ul>
+ <div class="note">原工作簿内嵌 1 张图片。本 HTML 未嵌入该图片，而是将图片中的标题、说明、图例、坐标轴含义及其对应的 10 组分位坏账率转为文本和表格。工作簿未发现隐藏工作表；空白单元格不作为内容展示。</div>
+</section>
+
+<footer>纯 HTML 数据解析版 · 无图片、无 SVG、无外部资源依赖 · 可离线打开</footer>
+</main>
+</body>
+</html>
