@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Wagego 新客画像 · FPD15</title>
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #fffdf9;
+  --ink: #211e1a;
+  --ink-2: #5f594f;
+  --ink-3: #736c61;
+  --line: #e4ded4;
+  --track: #ece6dc;
+  --risk: #b23a32;
+  --risk-soft: #f5e2df;
+  --good: #2f6f4e;
+  --good-soft: #e2efe7;
+  --neutral: #8a6a2f;
+  --neutral-soft: #f3e9d7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141311;
+    --surface: #1e1c19;
+    --ink: #f2ede4;
+    --ink-2: #bdb5a7;
+    --ink-3: #8f877a;
+    --line: #332f29;
+    --track: #2a2723;
+    --risk: #e07b72;
+    --risk-soft: #3a2422;
+    --good: #7cc39a;
+    --good-soft: #1d3026;
+    --neutral: #d6b06a;
+    --neutral-soft: #332b1d;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+main { max-width: 1080px; margin: 0 auto; padding: 56px 24px 80px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 16px;
+}
+h1 {
+  font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-size: clamp(38px, 6vw, 64px); line-height: 1.15;
+  letter-spacing: -.02em; margin: 0 0 20px; font-weight: 600;
+}
+.lede {
+  font-size: clamp(17px, 2vw, 20px); color: var(--ink-2);
+  max-width: 720px; margin: 0 0 32px;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.hero-stats div { display: flex; flex-direction: column; gap: 4px; }
+.hero-stats strong {
+  font-size: clamp(28px, 4vw, 40px); font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+.hero-stats span { font-size: 13px; color: var(--ink-3); }
+.hero-note { margin: 12px 0 0; font-size: 12px; color: var(--ink-3); }
+.quote {
+  margin: 56px 0; padding: 28px 32px; border-left: 4px solid var(--neutral);
+  background: var(--surface);
+}
+.quote p {
+  margin: 0; font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-size: clamp(22px, 3vw, 30px); line-height: 1.45;
+}
+section { margin: 64px 0; }
+.section-head { margin-bottom: 8px; }
+.section-head h2 {
+  font-size: clamp(22px, 3vw, 30px); margin: 0; letter-spacing: -.01em;
+}
+.section-lede { color: var(--ink-2); max-width: 720px; margin: 0 0 28px; }
+.trait-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+}
+.trait {
+  background: var(--surface); padding: 22px 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.trait strong {
+  font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+.trait span { color: var(--ink-2); font-size: 14px; }
+.trait em { color: var(--ink-3); font-size: 12px; font-style: normal; }
+.callout {
+  margin: 20px 0 0; padding: 16px 20px; background: var(--neutral-soft);
+  border-left: 3px solid var(--neutral); color: var(--ink); font-size: 15px;
+}
+.persona-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+}
+.persona {
+  background: var(--surface); border: 1px solid var(--line);
+  border-top: 4px solid var(--tone); padding: 24px 22px;
+}
+.persona .kicker {
+  display: flex; align-items: center; gap: 8px; font-size: 12px;
+  letter-spacing: .08em; color: var(--ink-3); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.persona .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--tone); }
+.persona h3 { font-size: 20px; margin: 0 0 12px; line-height: 1.35; }
+.persona p { color: var(--ink-2); font-size: 14px; margin: 0 0 14px; }
+.persona ul {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.persona li {
+  font-size: 14px; color: var(--ink-2); padding-left: 14px; position: relative;
+}
+.persona li::before {
+  content: ""; position: absolute; left: 0; top: .55em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--tone);
+}
+.persona li strong { color: var(--ink); font-weight: 600; }
+.chart-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px;
+}
+.chart-card {
+  background: var(--surface); border: 1px solid var(--line); padding: 22px 20px;
+}
+.chart-card h3 { font-size: 16px; margin: 0 0 4px; }
+.chart-sub { font-size: 12px; color: var(--ink-3); margin: 0 0 8px; }
+.bar-chart {
+  --label: 190px; --value: 56px; --gap: 12px; --ref: 0.341;
+  position: relative; display: flex; flex-direction: column; gap: 16px;
+  margin-top: 28px;
+}
+.chart-ref {
+  position: absolute; top: -6px; bottom: 0;
+  left: calc(var(--label) + var(--gap) + (100% - var(--label) - var(--value) - 2 * var(--gap)) * var(--ref));
+  border-left: 1px dashed var(--ink-3); pointer-events: none;
+}
+.ref-label {
+  position: absolute; top: -24px;
+  left: calc(var(--label) + var(--gap) + (100% - var(--label) - var(--value) - 2 * var(--gap)) * var(--ref));
+  transform: translateX(-50%); font-size: 11px; color: var(--ink-3);
+  white-space: nowrap;
+}
+.bar-row {
+  display: grid; grid-template-columns: var(--label) 1fr var(--value);
+  gap: var(--gap); align-items: center;
+}
+.bar-label { font-size: 13px; color: var(--ink-2); line-height: 1.35; }
+.bar-label small { display: block; color: var(--ink-3); font-size: 11px; }
+.bar-track {
+  height: 10px; background: var(--track); border-radius: 2px; position: relative;
+}
+.bar { display: block; height: 10px; border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-risk { background: var(--risk); }
+.bar-good { background: var(--good); }
+.bar-value {
+  font-size: 13px; font-weight: 600; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.chart-note { font-size: 11px; color: var(--ink-3); margin: 18px 0 0; }
+details.table-view { margin-top: 12px; }
+details.table-view summary { font-size: 12px; color: var(--ink-3); cursor: pointer; }
+details.table-view table {
+  width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px;
+}
+details.table-view th, details.table-view td {
+  text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line);
+}
+details.table-view td:last-child, details.table-view th:last-child {
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.signal-list {
+  list-style: none; counter-reset: signal; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--line); border: 1px solid var(--line);
+}
+.signal-list li {
+  counter-increment: signal; display: grid; grid-template-columns: 36px 220px 1fr;
+  gap: 16px; align-items: baseline; background: var(--surface); padding: 16px 18px;
+}
+.signal-list li::before {
+  content: counter(signal, decimal-leading-zero); font-size: 12px;
+  color: var(--ink-3); font-variant-numeric: tabular-nums;
+}
+.signal-list strong { font-size: 14px; }
+.signal-list span { font-size: 13px; color: var(--ink-2); }
+footer {
+  margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
+  color: var(--ink-3); font-size: 12px;
+}
+footer details summary { cursor: pointer; color: var(--ink-2); font-size: 13px; }
+footer ul {
+  margin: 12px 0 0; padding-left: 18px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+footer p { margin: 16px 0 0; }
+.tip {
+  position: fixed; z-index: 20; pointer-events: none;
+  background: var(--ink); color: var(--bg); padding: 6px 10px;
+  font-size: 12px; border-radius: 6px; opacity: 0;
+  transform: translate(-50%, -120%); transition: opacity .12s ease;
+  max-width: 280px; line-height: 1.4;
+}
+.tip.show { opacity: 1; }
+@media (max-width: 720px) {
+  main { padding: 36px 18px 60px; }
+  .hero-stats { grid-template-columns: 1fr; gap: 20px; }
+  .bar-chart { --label: 124px; --value: 44px; --gap: 8px; }
+  .signal-list li { grid-template-columns: 28px 1fr; gap: 8px 12px; }
+  .signal-list li span { grid-column: 2; }
+}
+@media print {
+  :root {
+    --bg: #ffffff; --surface: #ffffff; --ink: #211e1a; --ink-2: #5f594f;
+    --ink-3: #6f685e; --line: #ddd6ca; --track: #eee8de;
+    --risk: #b23a32; --risk-soft: #f5e2df;
+    --good: #2f6f4e; --good-soft: #e2efe7;
+    --neutral: #8a6a2f; --neutral-soft: #f3e9d7;
+  }
+  body { background: #fff; }
+  main { max-width: none; padding: 0; }
+  .persona, .chart-card, .trait, .quote, .signal-list li { break-inside: avoid; }
+  .tip { display: none; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <p class="eyebrow">WAGEGO · 新客画像</p>
+    <h1>流水干净，<br>但经不起波动。</h1>
+    <p class="lede">
+      6,733 位首笔成交新客的银行流水画像。多数人没有扣款失败，也没有大量退款；
+      真正拉开风险差距的，是现金流缓冲和还款能力。
+    </p>
+    <div class="hero-stats">
+      <div><strong>6,733</strong><span>位新客</span></div>
+      <div><strong>10.2%</strong><span>FPD15 坏率（首期逾期 15 天+）</span></div>
+      <div><strong>2.6×</strong><span>最高风险行为的坏率倍数</span></div>
+    </div>
+    <p class="hero-note">坏率 = 每 100 位客户中，首期还款逾期 15 天以上的人数。</p>
+  </header>
+
+  <div class="quote">
+    <p>“这不是一群没有流水的人，而是一群流水正常、但现金流经不起波动的人。”</p>
+  </div>
+
+  <section>
+    <div class="section-head"><h2>先认识大多数：流水干净，缓冲偏薄</h2></div>
+    <p class="section-lede">
+      多数人的账户行为是正常的：不反复扣款失败，也不靠退款/冲正来回倒钱。
+      但“正常”不等于“安全”——他们的现金流缓冲很薄。
+    </p>
+    <div class="trait-grid"><div class="trait"><strong>49.7%</strong><span>近 56 天几乎没有未解决的扣款失败（≤1.47%）</span><em>这组人坏率 6.0%</em></div><div class="trait"><strong>74.6%</strong><span>工资预支几乎没有未解决扣款（≤10%）</span><em>这组人坏率 7.2%</em></div><div class="trait"><strong>54.6%</strong><span>近 28 天盈余 − 负债提款在 980–5,465</span><em>这组人坏率 9.0%</em></div></div>
+    <p class="callout">
+      但近三成（29.8%）的人，净收入/支出比 ≤1.7%，
+      这组人的坏率是 15.2%——比整体高 5.0 个百分点。
+    </p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>三种人，三种风险</h2></div>
+    <p class="section-lede">
+      把行为组合起来看，可以分出三类画像——这不是把客户硬分成三组，而是三种常见的状态。
+    </p>
+    <div class="persona-grid">
+      
+    <article class="persona" style="--tone: var(--neutral)">
+      <div class="kicker"><span class="dot"></span>多数人</div>
+      <h3>流水干净，缓冲偏薄</h3>
+      <p>账户行为正常：不反复扣款失败，也不靠退款/冲正来回倒钱。但“正常”不等于“安全”。</p>
+      <ul><li>近 56 天几乎没有未解决的扣款失败（≤1.47%）的人（49.7%），坏率 6.0%</li><li>工资预支几乎没有未解决扣款（≤10%）的人（74.6%），坏率 7.2%</li><li>盈余 − 负债提款在 980–5,465 的人（54.6%），坏率 9.0%</li><li>风险暗流：净收入/支出 ≤1.7% 的人（29.8%），坏率 <strong>15.2%</strong></li></ul>
+    </article>
+      
+    <article class="persona" style="--tone: var(--risk)">
+      <div class="kicker"><span class="dot"></span>高风险</div>
+      <h3>现金流吃紧，靠预支周转</h3>
+      <p>扣款失败和退款/冲正明显偏多，现金流缓冲不足，靠工资预支或借贷机构预支周转。</p>
+      <ul><li>近 56 天未解决扣款占比 >31.9% 的人（5.0%），坏率 <strong>26.6%</strong></li><li>退款/冲正超过提款 1.25 倍的人（9.1%），坏率 <strong>21.8%</strong></li><li>近 28 天工资预支未解决扣款占比 >28.6% 的人（9.8%），坏率 <strong>24.4%</strong></li><li>近 28 天盈余 ≤980 的人（24.9%），坏率 <strong>17.6%</strong></li></ul>
+    </article>
+      
+    <article class="persona" style="--tone: var(--good)">
+      <div class="kicker"><span class="dot"></span>低风险</div>
+      <h3>现金流稳，负债行为正常</h3>
+      <p>退款少、盈余足、净收入能覆盖支出，负债还款记录稳定。</p>
+      <ul><li>近 28 天退款/提款比 ≤1.7% 的人（41.1%），坏率 <strong>4.9%</strong></li><li>近 28 天盈余 >5,465 的人（19.9%），坏率 <strong>4.4%</strong></li><li>净收入/支出 >22.2% 的人（9.9%），坏率 <strong>3.3%</strong></li><li>负债还款 >1,407 的人（19.9%），坏率 <strong>4.7%</strong></li></ul>
+    </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>风险信号有多强</h2></div>
+    <p class="section-lede">
+      把人群按行为分组看，坏率差距很明显。虚线是整体坏率 10.2%。
+    </p>
+    <div class="chart-grid">
+      
+    <div class="chart-card">
+      <h3>高风险行为</h3>
+      <p class="chart-sub">落在这些区间的人，坏率明显高于整体</p>
+      <div class="bar-chart" style="--ref: 0.341">
+        <span class="ref-label">整体 10.2%</span>
+        <span class="chart-ref"></span>
+        
+        <div class="bar-row" data-tip="有未解决的扣款失败 · 占比 &gt; 31.9% · 人群 5.0% · 坏率 26.6%（整体 10.2%）" tabindex="0" aria-label="有未解决的扣款失败 · 占比 &gt; 31.9% · 人群 5.0% · 坏率 26.6%（整体 10.2%）">
+          <div class="bar-label">有未解决的扣款失败<small>占比 > 31.9% · 人群 5.0%</small></div>
+          <div class="bar-track"><span class="bar bar-risk" style="width:88.6%"></span></div>
+          <div class="bar-value">26.6%</div>
+        </div>
+        <div class="bar-row" data-tip="很少使用主流贷款 · 主流贷款占比 ≤ 3.4% · 人群 5.0% · 坏率 24.8%（整体 10.2%）" tabindex="0" aria-label="很少使用主流贷款 · 主流贷款占比 ≤ 3.4% · 人群 5.0% · 坏率 24.8%（整体 10.2%）">
+          <div class="bar-label">很少使用主流贷款<small>主流贷款占比 ≤ 3.4% · 人群 5.0%</small></div>
+          <div class="bar-track"><span class="bar bar-risk" style="width:82.6%"></span></div>
+          <div class="bar-value">24.8%</div>
+        </div>
+        <div class="bar-row" data-tip="工资预支有未解决扣款 · 占比 &gt; 28.6% · 人群 9.8% · 坏率 24.4%（整体 10.2%）" tabindex="0" aria-label="工资预支有未解决扣款 · 占比 &gt; 28.6% · 人群 9.8% · 坏率 24.4%（整体 10.2%）">
+          <div class="bar-label">工资预支有未解决扣款<small>占比 > 28.6% · 人群 9.8%</small></div>
+          <div class="bar-track"><span class="bar bar-risk" style="width:81.4%"></span></div>
+          <div class="bar-value">24.4%</div>
+        </div>
+        <div class="bar-row" data-tip="退款/冲正超过提款 · 超过 1.25 倍 · 人群 9.1% · 坏率 21.8%（整体 10.2%）" tabindex="0" aria-label="退款/冲正超过提款 · 超过 1.25 倍 · 人群 9.1% · 坏率 21.8%（整体 10.2%）">
+          <div class="bar-label">退款/冲正超过提款<small>超过 1.25 倍 · 人群 9.1%</small></div>
+          <div class="bar-track"><span class="bar bar-risk" style="width:72.6%"></span></div>
+          <div class="bar-value">21.8%</div>
+        </div>
+        <div class="bar-row" data-tip="近 28 天盈余不足 · ≤ 980 · 人群 24.9% · 坏率 17.6%（整体 10.2%）" tabindex="0" aria-label="近 28 天盈余不足 · ≤ 980 · 人群 24.9% · 坏率 17.6%（整体 10.2%）">
+          <div class="bar-label">近 28 天盈余不足<small>≤ 980 · 人群 24.9%</small></div>
+          <div class="bar-track"><span class="bar bar-risk" style="width:58.7%"></span></div>
+          <div class="bar-value">17.6%</div>
+        </div>
+      </div>
+      <p class="chart-note">虚线 = 整体坏率 10.2%；数值为该区间人群的 FPD15 坏率。</p>
+      <details class="table-view">
+        <summary>查看数据表</summary>
+        <table>
+          <thead><tr><th>行为</th><th>区间</th><th>人群占比</th><th>坏率</th></tr></thead>
+          <tbody><tr><td>有未解决的扣款失败</td><td>占比 > 31.9%</td><td>5.0%</td><td>26.6%</td></tr><tr><td>很少使用主流贷款</td><td>主流贷款占比 ≤ 3.4%</td><td>5.0%</td><td>24.8%</td></tr><tr><td>工资预支有未解决扣款</td><td>占比 > 28.6%</td><td>9.8%</td><td>24.4%</td></tr><tr><td>退款/冲正超过提款</td><td>超过 1.25 倍</td><td>9.1%</td><td>21.8%</td></tr><tr><td>近 28 天盈余不足</td><td>≤ 980</td><td>24.9%</td><td>17.6%</td></tr></tbody>
+        </table>
+      </details>
+    </div>
+      
+    <div class="chart-card">
+      <h3>低风险行为</h3>
+      <p class="chart-sub">落在这些区间的人，坏率只有整体的一半左右</p>
+      <div class="bar-chart" style="--ref: 0.341">
+        <span class="ref-label">整体 10.2%</span>
+        <span class="chart-ref"></span>
+        
+        <div class="bar-row" data-tip="退款/提款比低 · ≤ 1.7% · 人群 41.1% · 坏率 4.9%（整体 10.2%）" tabindex="0" aria-label="退款/提款比低 · ≤ 1.7% · 人群 41.1% · 坏率 4.9%（整体 10.2%）">
+          <div class="bar-label">退款/提款比低<small>≤ 1.7% · 人群 41.1%</small></div>
+          <div class="bar-track"><span class="bar bar-good" style="width:16.4%"></span></div>
+          <div class="bar-value">4.9%</div>
+        </div>
+        <div class="bar-row" data-tip="负债还款充足 · &gt; 1,407 · 人群 19.9% · 坏率 4.7%（整体 10.2%）" tabindex="0" aria-label="负债还款充足 · &gt; 1,407 · 人群 19.9% · 坏率 4.7%（整体 10.2%）">
+          <div class="bar-label">负债还款充足<small>> 1,407 · 人群 19.9%</small></div>
+          <div class="bar-track"><span class="bar bar-good" style="width:15.7%"></span></div>
+          <div class="bar-value">4.7%</div>
+        </div>
+        <div class="bar-row" data-tip="近 28 天盈余充足 · &gt; 5,465 · 人群 19.9% · 坏率 4.4%（整体 10.2%）" tabindex="0" aria-label="近 28 天盈余充足 · &gt; 5,465 · 人群 19.9% · 坏率 4.4%（整体 10.2%）">
+          <div class="bar-label">近 28 天盈余充足<small>> 5,465 · 人群 19.9%</small></div>
+          <div class="bar-track"><span class="bar bar-good" style="width:14.7%"></span></div>
+          <div class="bar-value">4.4%</div>
+        </div>
+        <div class="bar-row" data-tip="主流贷款使用充分 · 主流贷款占比 &gt; 76.4% · 人群 9.9% · 坏率 3.6%（整体 10.2%）" tabindex="0" aria-label="主流贷款使用充分 · 主流贷款占比 &gt; 76.4% · 人群 9.9% · 坏率 3.6%（整体 10.2%）">
+          <div class="bar-label">主流贷款使用充分<small>主流贷款占比 > 76.4% · 人群 9.9%</small></div>
+          <div class="bar-track"><span class="bar bar-good" style="width:12.0%"></span></div>
+          <div class="bar-value">3.6%</div>
+        </div>
+        <div class="bar-row" data-tip="净收入覆盖支出 · &gt; 22.2% · 人群 9.9% · 坏率 3.3%（整体 10.2%）" tabindex="0" aria-label="净收入覆盖支出 · &gt; 22.2% · 人群 9.9% · 坏率 3.3%（整体 10.2%）">
+          <div class="bar-label">净收入覆盖支出<small>> 22.2% · 人群 9.9%</small></div>
+          <div class="bar-track"><span class="bar bar-good" style="width:11.0%"></span></div>
+          <div class="bar-value">3.3%</div>
+        </div>
+      </div>
+      <p class="chart-note">虚线 = 整体坏率 10.2%；数值为该区间人群的 FPD15 坏率。</p>
+      <details class="table-view">
+        <summary>查看数据表</summary>
+        <table>
+          <thead><tr><th>行为</th><th>区间</th><th>人群占比</th><th>坏率</th></tr></thead>
+          <tbody><tr><td>退款/提款比低</td><td>≤ 1.7%</td><td>41.1%</td><td>4.9%</td></tr><tr><td>负债还款充足</td><td>> 1,407</td><td>19.9%</td><td>4.7%</td></tr><tr><td>近 28 天盈余充足</td><td>> 5,465</td><td>19.9%</td><td>4.4%</td></tr><tr><td>主流贷款使用充分</td><td>主流贷款占比 > 76.4%</td><td>9.9%</td><td>3.6%</td></tr><tr><td>净收入覆盖支出</td><td>> 22.2%</td><td>9.9%</td><td>3.3%</td></tr></tbody>
+        </table>
+      </details>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>什么信号最重要</h2></div>
+    <p class="section-lede">从区分能力看，这几类行为最值得关注。</p>
+    <ol class="signal-list"><li><strong>扣款失败 / 拒付记录</strong><span>有未解决扣款的人坏率 26.6%，是整体的 2.6 倍。</span></li><li><strong>现金流盈余</strong><span>盈余 ≤980 的人坏率 17.6%，>5,465 的人只有 4.4%。</span></li><li><strong>借贷机构预支</strong><span>近 28 天预支金额 ≤300 的人坏率 17.2%，>1,395 的人只有 3.2%。</span></li><li><strong>退款 / 冲正</strong><span>退款超过提款 1.25 倍的人坏率 21.8%，≤1.7% 的人只有 4.9%。</span></li><li><strong>收入、支出、余额</strong><span>单独看区分能力有限，更多是背景信息，不如上面几类行为直接。</span></li></ol>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>“没有记录”的人，也值得注意</h2></div>
+    <p class="section-lede">
+      有些变量缺失不是数据坏了，而是这个人没有可计算的行为。
+      这些“没有记录”的人，坏率反而高于整体。
+    </p>
+    <div class="trait-grid"><div class="trait"><strong>8.8%</strong><span>的人算不出“退款/提款比”</span><em>这组人坏率 19.8%</em></div><div class="trait"><strong>17.5%</strong><span>的人没有“借贷机构预支金额”</span><em>这组人坏率 16.9%</em></div><div class="trait"><strong>54.3%</strong><span>的人近 7 天没有先买后付（BNPL）还款记录</span><em>这组人坏率 13.1%</em></div></div>
+    <p class="callout">
+      没有记录不一定是数据质量问题；对一部分人来说，“没有可计算的提款/还款行为”本身就是风险信号。
+    </p>
+  </section>
+
+  <footer>
+    <details>
+      <summary>数据口径</summary>
+      <ul>
+        <li>样本：6,733 名已成熟的首笔成交新客，每人一笔；FPD15 = 首期还款逾期 15 天以上。</li>
+        <li>画像来自 740 个行为变量的分组统计，是群体层面的描述，不代表同一批人同时具备所有特征，也不构成对个人的判断。</li>
+        <li>数据源：samples_sample_with_feature_all_y_fpd15_ovd_特征分箱结果.csv。</li>
+      </ul>
+    </details>
+    <p>Wagego 新客画像 · 生成于 2026-11-03</p>
+  </footer>
+</main>
+<div class="tip" role="status"></div>
+<script>
+const tip = document.querySelector('.tip');
+document.querySelectorAll('[data-tip]').forEach(el => {
+  const place = (x, y) => { tip.style.left = x + 'px'; tip.style.top = y + 'px'; };
+  const show = () => { tip.textContent = el.dataset.tip; tip.classList.add('show'); };
+  const showAtElement = () => {
+    const r = el.getBoundingClientRect();
+    place(r.left + r.width / 2, r.top + r.height / 2);
+    show();
+  };
+  const hide = () => tip.classList.remove('show');
+  el.addEventListener('mouseenter', show);
+  el.addEventListener('focus', showAtElement);
+  el.addEventListener('mousemove', e => place(e.clientX, e.clientY));
+  el.addEventListener('mouseleave', hide);
+  el.addEventListener('blur', hide);
+});
+</script>
+</body>
+</html>
