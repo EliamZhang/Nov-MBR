@@ -1,3 +1,2 @@
-.mbr-build/
-.mbr-layout-v2/
-.mbr-polish/
+.mbr-*/
+~$*
